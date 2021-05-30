@@ -21,13 +21,13 @@ services:
         environment: 
             - JUPYTER_TOKEN=root
         volumes: 
-            - /src/
+            - /app/
         ports: 
             - 8888:8888
         container_name: jupyter
         depends_on: 
-            - mysql
+            - db
         links: 
-            - "mysql:db"
+            - "db:db"
         
                 
