@@ -1,6 +1,6 @@
 version: '3.7'
 services: 
-    db:
+    database:
         image: mysql:latest
         volumes:
             - ./covidcases.sql:/docker-entrypoint-initdb.d/covidcases.sql
@@ -13,7 +13,7 @@ services:
             - MYSQL_ROOT_PASSWORD=slopeza 
         restart: always
            
-        container_name: db
+        container_name: database
     jupyter:
         build: 
             context: .
@@ -26,8 +26,8 @@ services:
             - 8888:8888
         container_name: jupyter
         depends_on: 
-            - db
+            - database
         links: 
-            - "db:db"
+            - "database:db"
         
                 
