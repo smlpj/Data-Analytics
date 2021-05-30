@@ -1,0 +1,33 @@
+version: '3.7'
+services: 
+    db:
+        image: mysql:latest
+        volumes:
+            - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
+            - /var/lib/mysql
+        ports:
+            - "33061:3306"
+        environment:
+            - MYSQL_USER=slopeza
+            - MYSQL_PASSWORD=secret
+            - MYSQL_ROOT_PASSWORD=slopeza 
+        restart: always
+           
+        container_name: db
+    jupyter:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        environment: 
+            - JUPYTER_TOKEN=root
+        volumes: 
+            - /src/
+        ports: 
+            - 8888:8888
+        container_name: jupyter
+        depends_on: 
+            - mysql
+        links: 
+            - "mysql:db"
+        
+                
