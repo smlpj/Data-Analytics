@@ -3,7 +3,7 @@ services:
     db:
         image: mysql:latest
         volumes:
-            - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
+            - ./covidcases.sql:/docker-entrypoint-initdb.d/covidcases.sql
             - /var/lib/mysql
         ports:
             - "33061:3306"
