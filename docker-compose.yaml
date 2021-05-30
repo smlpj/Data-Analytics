@@ -1,0 +1,32 @@
+version: '3.7'
+services: 
+    jupyter:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        environment: 
+            - JUPYTER_TOKEN=password
+        volumes: 
+            - /src/
+        ports: 
+            - 8888:8888
+        container_name: jupyter
+        depends_on: 
+            - mysql
+        links: 
+            - "mysql:db"
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        volumes:
+            - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
+            - /var/lib/mysql
+        restart: always
+        environment:
+            - MYSQL_USER=elculodejose
+            - MYSQL_PASSWORD=secret
+            - MYSQL_ROOT_PASSWORD=elculodejose
+        ports:
+            - "33061:3306"
+        
+                
