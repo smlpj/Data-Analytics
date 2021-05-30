@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN apt-get update && apt-get -y update
-RUN apt-get install -y build-essential python3.9 python3-pip python3-dev
+RUN apt-get install -y build-essential python3.8 python3-pip python3-dev
 RUN pip3 -q install pip --upgrade
 RUN mkdir app
 WORKDIR /app/
