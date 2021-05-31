@@ -27,6 +27,9 @@ df2=pd.read_sql_query("SELECT state, AVG(deaths) promdeaths FROM covidcases GROU
 df3=pd.read_sql_query("SELECT state, SUM(cases) totalcases FROM covidcases GROUP BY state ORDER BY totalcases DESC LIMIT 10",conn)
 
 fig=px.bar(df1,x='state', y='totalcases')
+fig2=px.bar(df2,x='state', y='promdeaths')
+fig3=px.bar(df3,x='state', y='totalcases')
+
 
 app.layout = html.Div(children=[
     html.H1(children='Hello Dash'),
@@ -38,6 +41,16 @@ app.layout = html.Div(children=[
     dcc.Graph(
         id='example-graph',
         figure=fig
+    )
+
+    dcc.Graph(
+        id='example-graph',
+        figure=fig2
+    )
+
+    dcc.Graph(
+        id='example-graph',
+        figure=fig3
     )
 
 ])
