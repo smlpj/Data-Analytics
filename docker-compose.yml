@@ -11,13 +11,10 @@ services:
             - MYSQL_USER=slopeza
             - MYSQL_PASSWORD=secret
             - MYSQL_ROOT_PASSWORD=slopeza 
-        restart: always
-           
+        restart: always 
         container_name: database
     jupyter:
-        build: 
-            context: .
-            dockerfile: Dockerfile
+        build: ./Jupyter
         environment: 
             - JUPYTER_TOKEN=root
         volumes: 
@@ -29,5 +26,16 @@ services:
             - database
         links: 
             - "database:db"
+    dash:
+        build: ./dash
+        volumes: 
+            - ./dash:/usr/src/app
+        ports: 
+            - 7070:70
+        depends_on: 
+            - database
+        links: 
+            - "database:db"
+
         
                 
